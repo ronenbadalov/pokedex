@@ -30,7 +30,7 @@ const Card = (props: Props) => {
   return (
     <div className={classes.card}>
       <div className={classes.imgBox}>
-        <img src={pokemonData.image} />
+        <img src={pokemonData.image} alt={pokemonData.name} />
       </div>
       <h1>{capitalizeName(pokemonData.name)}</h1>
       <div className={classes["abilities"]}>
