@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import {
   PokemonResponseObject,
   PokemonResult,
@@ -20,7 +20,7 @@ const Select = (props: Props) => {
 
   useEffect(() => {
     props.setSelectedPokemon(props.pokemons?.results[0]);
-  }, [props]);
+  }, [props.setSelectedPokemon, props.pokemons]);
   return (
     <div className={classes["container"]}>
       <select className={classes["select"]} onChange={handlePokemonChange}>
@@ -34,4 +34,4 @@ const Select = (props: Props) => {
   );
 };
 
-export default Select;
+export default memo(Select);
