@@ -9,7 +9,7 @@ type Props = {
 
 const Card = (props: Props) => {
   const [pokemonData, setPokemonData] = useState<Pokemon>({
-    id: 0,
+    id: 1,
     name: "",
     image: "",
     description: "",
@@ -17,6 +17,7 @@ const Card = (props: Props) => {
 
   useEffect(() => {
     (async () => {
+      if (!props.selectedPokemon?.url) return;
       const data = await getPokemonDescription(props.selectedPokemon?.url);
       const abilityData = await getPokemonAbilities(data.id);
       setPokemonData({
@@ -30,7 +31,7 @@ const Card = (props: Props) => {
   return (
     <div className={classes.card}>
       <div className={classes.imgBox}>
-        <img src={pokemonData.image} alt={pokemonData.name} />
+        <img src={pokemonData.image} alt={pokemonData.name} loading="lazy" />
       </div>
       <h1>{capitalizeName(pokemonData.name)}</h1>
       <div className={classes["abilities"]}>
