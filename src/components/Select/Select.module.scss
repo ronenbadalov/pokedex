@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .select {
+    padding: 1rem 0.5rem;
+    width: 100%;
+    font-size: 15pt;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+}
