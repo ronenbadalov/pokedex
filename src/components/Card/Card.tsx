@@ -4,7 +4,7 @@ import { Pokemon, PokemonResult } from "../../models/pokemon.model";
 import { capitalizeName } from "../../utils/utils";
 import classes from "./Card.module.scss";
 type Props = {
-  selectedPokemon: PokemonResult | undefined;
+  selectedPokemon: PokemonResult;
 };
 
 const Card = (props: Props) => {

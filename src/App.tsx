@@ -4,6 +4,7 @@ import "./App.scss";
 import Select from "./components/Select/Select";
 import { PokemonResponseObject, PokemonResult } from "./models/pokemon.model";
 import Card from "./components/Card/Card";
+import PaginationButtons from "./components/Buttons/PaginationButtons";
 
 const App = () => {
   const [pokemons, setPokemons] = useState<PokemonResponseObject>({
@@ -12,9 +13,10 @@ const App = () => {
     previous: "",
     results: [{ name: "", url: "" }],
   });
-  const [selectedPokemon, setSelectedPokemon] = useState<
-    PokemonResult | undefined
-  >();
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonResult>({
+    name: "",
+    url: "",
+  });
 
   useEffect(() => {
     (async () => {
@@ -24,8 +26,17 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      <Select pokemons={pokemons} setSelectedPokemon={setSelectedPokemon} />
+      <Select
+        selectedPokemon={selectedPokemon}
+        pokemons={pokemons}
+        setSelectedPokemon={setSelectedPokemon}
+      />
       <Card selectedPokemon={selectedPokemon} />
+      <PaginationButtons
+        pokemons={pokemons}
+        selectedPokemon={selectedPokemon}
+        setSelectedPokemon={setSelectedPokemon}
+      />
     </div>
   );
 };
