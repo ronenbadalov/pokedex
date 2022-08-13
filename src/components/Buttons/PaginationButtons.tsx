@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PokemonResponseObject,
   PokemonResult,
@@ -24,30 +24,14 @@ const PaginationButtons = (props: Props) => {
     props.setSelectedPokemon(props.pokemons.results[curPokeIndex - 1]);
   };
 
-  const checkIfThereIsNext = useCallback(
-    (pokeI: number) => {
-      if (pokeI + 1 === props.pokemons.results.length && !isNextDisabled)
-        setIsNextDisabled(true);
-      else if (pokeI < props.pokemons.results.length && isNextDisabled)
-        setIsNextDisabled(false);
-    },
-    [props.pokemons.results, setIsNextDisabled, isNextDisabled]
-  );
-
-  const checkIfThereIsPrev = useCallback(
-    (pokeI: number) => {
-      if (pokeI === 0 && !isPrevDisabled) setIsPrevDisabled(true);
-      else if (pokeI > 0 && isPrevDisabled) setIsPrevDisabled(false);
-    },
-    [setIsPrevDisabled, isPrevDisabled]
-  );
-
   useEffect(() => {
     const pokeI = props.pokemons.results.indexOf(props.selectedPokemon);
     setCurPokeIndex(pokeI);
-    checkIfThereIsNext(pokeI);
-    checkIfThereIsPrev(pokeI);
-  }, [props, checkIfThereIsNext, checkIfThereIsPrev, isNextDisabled]);
+    if (pokeI + 1 === props.pokemons.results.length) setIsNextDisabled(true);
+    else if (pokeI < props.pokemons.results.length) setIsNextDisabled(false);
+    if (pokeI === 0) setIsPrevDisabled(true);
+    else if (pokeI > 0) setIsPrevDisabled(false);
+  }, [props]);
 
   return (
     <div className={classes["paginationBtns"]}>
