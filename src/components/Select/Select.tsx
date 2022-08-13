@@ -20,7 +20,7 @@ const Select = (props: Props) => {
 
   useEffect(() => {
     props.setSelectedPokemon(props.pokemons?.results[0]);
-  }, [props.pokemons]);
+  }, [props]);
   return (
     <div className={classes["container"]}>
       <select className={classes["select"]} onChange={handlePokemonChange}>
