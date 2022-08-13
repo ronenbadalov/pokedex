@@ -11,20 +11,21 @@ type Props = {
   setSelectedPokemon: (value: PokemonResult | undefined) => void;
 };
 
-const Select = (props: Props) => {
+const Select = ({ pokemons, setSelectedPokemon }: Props) => {
   const handlePokemonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption: PokemonResult | undefined =
-      props.pokemons.results.find((pokemon) => pokemon.name === e.target.value);
-    props.setSelectedPokemon(selectedOption);
+    const selectedOption: PokemonResult | undefined = pokemons.results.find(
+      (pokemon) => pokemon.name === e.target.value
+    );
+    setSelectedPokemon(selectedOption);
   };
 
   useEffect(() => {
-    props.setSelectedPokemon(props.pokemons?.results[0]);
-  }, [props.setSelectedPokemon, props.pokemons]);
+    setSelectedPokemon(pokemons?.results[0]);
+  }, [pokemons]);
   return (
     <div className={classes["container"]}>
       <select className={classes["select"]} onChange={handlePokemonChange}>
-        {props.pokemons?.results.map((pokemon) => (
+        {pokemons?.results.map((pokemon) => (
           <option key={pokemon.name} value={pokemon.name}>
             {capitalizeName(pokemon.name)}
           </option>
